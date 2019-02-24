@@ -242,7 +242,8 @@ void setup() {
 
 
   //if you get here you have connected to the WiFi
-  Serial.printf("connected %s\n", WiFi.localIP());
+  Serial.print("connected ");
+  Serial.println(WiFi.localIP());
 
   if (shouldSaveConfig) {
     strcpy(SensorName, custom_SensorName.getValue());
