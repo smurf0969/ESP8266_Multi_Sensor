@@ -1,9 +1,9 @@
 #include <FS.h>//this needs to be first, or it all crashes and burns...
 
 #include <ESP8266WiFi.h>
-#include <PubSubClient.h>
+#include <PubSubClient.h> //https://github.com/knolleary/pubsubclient
 #include <stdlib.h>
-#include <DHT.h>
+#include <DHT.h> //https://github.com/adafruit/DHT-sensor-library
 
 //needed for WiFiManager library
 #include <DNSServer.h>
@@ -46,8 +46,8 @@ const int THL_rate_limit = 60000; //interval in msecs to check temp,humidity,lig
 const int maxMinutesBetweenSends = 3;
 
 /* Input Pins */
-const int thPin = 4;//D1 //temp, humidity pin io 5 has internal pullup
-const int pirPin = 5;//D5 //pin for pir
+const int thPin = 4;//D2 //temp, humidity pin io 4 has internal pullup
+const int pirPin = 5;//D1 //pin for pir
 /* Power Pins 3.3v, no pwr pin for PIR as its 5v */
 const int ldrPwr = 10;
 const int thPwr = 2;
