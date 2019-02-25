@@ -13,6 +13,15 @@ In this code I have gone away from updating every second to only updating when v
     - Photoresistor GL5528 LDR Photo Resistors Light-Dependent
     - HC-SR501 Human Sensor Module Pyroelectric Infrared PIR Motion Detector Module
 
+## IDE & Library Versions
+### Arduino IDE
+ > Arduino: 1.8.8
+
+### Libraries
+  - PubSubClient 2.7 [https://github.com/knolleary/pubsubclient.git](https://github.com/knolleary/pubsubclient.git)
+  - WiFiManager 0.14 [https://github.com/tzapu/WiFiManager.git](https://github.com/tzapu/WiFiManager.git)
+  - ArduinoJson 6.8.0-beta [https://github.com/bblanchon/ArduinoJson.git](https://github.com/bblanchon/ArduinoJson.git)
+
 ## Configuration
 Some of the variables in the script can also be set through the Access Point configuration page to allow the code to be used with different setups
 ```
