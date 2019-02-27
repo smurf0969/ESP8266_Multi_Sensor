@@ -1,7 +1,7 @@
 # ESP8266_Multi_Sensor
 Temperature, Humidity, Light Level and PIR Motion senor working of a ESP8266 ESP12-E Wifi chip
 
-# Description
+# Overview
 I've has a few of these sensors up and running for a while now, but alas one went faulty which gave me the excuse to reprogram the new and existing sensors.  
 With my previous sensors, they would occasionally fail to reconnect to WiFi if the router took to long to boot after a power outage. Using the [WiFi Manager](https://github.com/tzapu/WiFiManager) has cured this problem by restarting the chip if needed and also allows for some configuration in the access point portal so the same code can be used for different sensor setups.  
 Also due to the number of devices connecting and updating to my Openhab home automation server, I occasionally had latency issues with everything updating every second.  
