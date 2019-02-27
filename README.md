@@ -15,7 +15,7 @@ In this code I have gone away from updating every second to only updating when v
 
 
 ## Configuration & IDE Setup
-Please consult/review the **Wiki**
+Please consult/review the [**Wiki**](https://github.com/smurf0969/ESP8266_Multi_Sensor/wiki)
 
 ## Thanks
 Many thanks to the authors and contibutors for the main libraries that made this project possible  
