@@ -13,49 +13,10 @@ In this code I have gone away from updating every second to only updating when v
     - Photoresistor GL5528 LDR Photo Resistors Light-Dependent
     - HC-SR501 Human Sensor Module Pyroelectric Infrared PIR Motion Detector Module
 
-## IDE & Library Versions
-### Arduino IDE
- > Arduino: 1.8.8
 
-### Libraries
-  - PubSubClient 2.7 [https://github.com/knolleary/pubsubclient.git](https://github.com/knolleary/pubsubclient.git)
-  - WiFiManager 0.14 [https://github.com/tzapu/WiFiManager.git](https://github.com/tzapu/WiFiManager.git)
-  - ArduinoJson 6.8.0-beta [https://github.com/bblanchon/ArduinoJson.git](https://github.com/bblanchon/ArduinoJson.git)
+## Configuration & IDE Setup
+Please consult/review the [Wiki](./wiki)
 
-## Configuration
-Some of the variables in the script can also be set through the Access Point configuration page to allow the code to be used with different setups
-```
-/* Configurable within WiFi Access Point */
-bool hasTemperature = true;
-bool hasHumidity = true;
-bool hasLight = true;
-bool hasPIR = true;
-/* Configurable within WiFi Access Point */
-char SensorName[25] ; 
-char mqtt_server[16] = "192.168.1.200"; 
-```
-
-Other variables for confuration are located near the top of the file.  
-I have added calibration times to the script to allow sensors to wake up and settle before they are read.  
-The PIR calibration is initialized on main power up as it is perminatly powered and the others are from when they are powered up in the main program loop.  
-Bare in mind that all but the PIR are not powered on until *THL_rate_limit* has elapsed so the actual sample will take place after *THL_rate_limit + ???CalibrationTimeMS*.  
-
-```
-/* Sensor checking & publishing rates */
-const int pirCalibrationTimeMS = 30000; //at least 30secs
-const int ldrCalibrationTimeMS = 300;
-const int dhtCalibrationTimeMS = 1500;
-const int PIR_rate_limit = 500; //limit checking to once every ?? ms
-const int THL_rate_limit = 60000; //interval in msecs to check temp,humidity,light & only send  if different
-const int maxMinutesBetweenSends = 3;
-
-/* Input Pins */
-const int thPin = 4;//D2 //temp, humidity pin io 4 has internal pullup
-const int pirPin = 5;//D1 //pin for pir
-/* Power Pins 3.3v, no pwr pin for PIR as its 5v */
-const int ldrPwr = 10;
-const int thPwr = 14;
-```
 ## Thanks
 Many thanks to the authors and contibutors for the main libraries that made this project possible  
 * [PubSubClient](https://github.com/knolleary/pubsubclient) for MQTT publishing
