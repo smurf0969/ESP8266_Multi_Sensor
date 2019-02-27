@@ -15,7 +15,7 @@ In this code I have gone away from updating every second to only updating when v
 
 
 ## Configuration & IDE Setup
-Please consult/review the [Wiki](./wiki)
+Please consult/review the Wiki
 
 ## Thanks
 Many thanks to the authors and contibutors for the main libraries that made this project possible  
