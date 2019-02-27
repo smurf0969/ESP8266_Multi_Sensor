@@ -54,7 +54,7 @@ const int thPin = 4;//D2 //temp, humidity pin io 4 has internal pullup
 const int pirPin = 5;//D1 //pin for pir
 /* Power Pins 3.3v, no pwr pin for PIR as its 5v */
 const int ldrPwr = 10;
-const int thPwr = 2;
+const int thPwr = 14;
 ```
 ## Thanks
 Many thanks to the authors and contibutors for the main libraries that made this project possible  
