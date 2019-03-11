@@ -17,7 +17,7 @@ before_install:
    - source <(curl -SLs https://raw.githubusercontent.com/smurf0969/travis-ci-arduino/master/install.sh)
 
 install:
-   - arduino --install-library "ArduinoJson","PubSubClient","DHT sensor library","WiFiManager"
+   - arduino --install-library "Adafruit Unified Sensor","ArduinoJson","PubSubClient","DHT sensor library","WiFiManager"
 
 script:
    - build_main_platforms
