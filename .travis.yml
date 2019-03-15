@@ -19,7 +19,7 @@ git:
   quiet: true
 env:
   global:
-     - PRETTYNAME="WiFi Multi Sensor"
+     - PRETTYNAME="ESP8266 Multi Sensor""
 
 matrix:
 
