@@ -1,28 +1,51 @@
-language: c
+branches:
+    only:
+      - master
+      - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+      
+os: linux
+dist: trusty
+language: bash
 sudo: false
 cache:
   directories:
     - ~/arduino_ide
-    - ~/.arduino15/packages/
+  #  - ~/.arduino15/packages/
+before_cache:
+    - rm -rf ~/arduino_ide/hardware/esp8266com
+    - rm -rf  ~/arduino_ide/hardware/espressif
 git:
   depth: false
   quiet: true
 env:
   global:
-     - ARDUINO_IDE_VERSION="1.8.7"
-     - PRETTYNAME="ESP8266 Multi Sensor"
+     - PRETTYNAME="WiFi Multi Sensor"
+
+matrix:
+
+  include:
+
+    - env:
+
+      - BUILD_TYPE=build_esp8266
+      - BUILDDOXYGEN=false
+
 
 
 before_install:
-   - source <(curl -SLs https://raw.githubusercontent.com/smurf0969/travis-ci-arduino/master/install.sh)
+
 
 install:
-   - arduino --install-library "Adafruit Unified Sensor","ArduinoJson","PubSubClient","DHT sensor library","WiFiManager"
+
 
 script:
-   - build_main_platforms
+   - $TRAVIS_BUILD_DIR/travis/common.sh
 
 # Generate and deploy documentation
 after_success:
-  - source <(curl -SLs  https://raw.githubusercontent.com/smurf0969/travis-ci-arduino/master/library_check.sh)
-#  - source <(curl -SLs  https://raw.githubusercontent.com/smurf0969/travis-ci-arduino/skip-doxygen-warnings/doxy_gen_and_deploy.sh)
+ 
+
+notifications:
+  email:
+    on_success: change # default: change
+    on_failure: always # default: always
