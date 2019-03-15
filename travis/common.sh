@@ -80,7 +80,8 @@ function build_sketches()
 function install_libraries()
 {
     mkdir -p $HOME/Arduino/libraries
-    cp -a $TRAVIS_BUILD_DIR $HOME/Arduino/libraries/WiFiConnect
+    #Copy yo sketch or library folder
+    cp -a $TRAVIS_BUILD_DIR $HOME/Arduino/
     git clone https://github.com/knolleary/pubsubclient $HOME/Arduino/libraries/pubsubclient
     git clone https://github.com/bblanchon/ArduinoJson $HOME/Arduino/libraries/ArduinoJson
     git clone https://github.com/adafruit/Adafruit_Sensor $HOME/Arduino/libraries/AdafruitSensor
@@ -168,7 +169,10 @@ function build_sketches_with_arduino()
     # Compile sketches
     echo -e "travis_fold:start:sketch_test"
 #    build_sketches $HOME/arduino_ide $TRAVIS_BUILD_DIR/libraries "-l $HOME/Arduino/libraries"
-    build_sketches $HOME/arduino_ide $HOME/Arduino/libraries "-l $HOME/Arduino/libraries"
+    #library
+    #build_sketches $HOME/arduino_ide $HOME/Arduino/libraries "-l $HOME/Arduino/libraries"
+    #sketch
+    build_sketches $HOME/arduino_ide $HOME/Arduino "-l $HOME/Arduino/libraries"
     echo -e "travis_fold:end:sketch_test"
 
     # Generate size report
