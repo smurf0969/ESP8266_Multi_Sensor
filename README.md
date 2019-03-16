@@ -1,4 +1,4 @@
-# ESP8266_Multi_Sensor
+# ESP8266_Multi_Sensor [![Build Status](https://travis-ci.com/smurf0969/ESP8266_Multi_Sensor.svg?branch=master)](https://travis-ci.com/smurf0969/ESP8266_Multi_Sensor)
 Temperature, Humidity, Light Level and PIR Motion senor working of a ESP8266 ESP12-E Wifi chip
 
 # Overview
