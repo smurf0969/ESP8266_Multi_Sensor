@@ -1,13 +1,13 @@
 #include <FS.h>//this needs to be first, or it all crashes and burns...
-
+#ifdef ESP8266
 #include <ESP8266WiFi.h>
+#else
+#include <WiFi.h>
+#endif
 #include <PubSubClient.h> //https://github.com/knolleary/pubsubclient
 #include <stdlib.h>
 #include <DHT.h> //https://github.com/adafruit/DHT-sensor-library
 
-//needed for WiFiManager library
-#include <DNSServer.h>
-#include <ESP8266WebServer.h>
 #include <WiFiConnect.h>          //https://github.com/smurf0969/WiFiConnect
 
 #include <ArduinoJson.h> //https://github.com/bblanchon/ArduinoJson
