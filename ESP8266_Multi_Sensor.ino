@@ -287,7 +287,11 @@ void reconnect() {
     } else {
       Serial.println(F("Resetting"));
       delay(1000);
+ #ifdef ESP8266
       ESP.reset();
+ #else
+      RDP.restart();
+ #endif
       delay(5000);
       return;
     }
@@ -317,7 +321,11 @@ void reconnect() {
     if (conAttempt > 5) {
       Serial.println(F("Resetting"));
       delay(1000);
+ #ifdef ESP8266
       ESP.reset();
+ #else
+      RDP.restart();
+ #endif
       for(int x=1;x<=5;x++){
         delay(1000);
         yield();
