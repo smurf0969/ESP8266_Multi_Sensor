@@ -87,12 +87,14 @@ function install_libraries()
     git clone https://github.com/adafruit/Adafruit_Sensor $HOME/Arduino/libraries/AdafruitSensor
     git clone https://github.com/adafruit/DHT-sensor-library $HOME/Arduino/libraries/DHT
     git clone https://github.com/smurf0969/WiFiConnect $HOME/Arduino/libraries/WiFiConnect
+    git clone --branch=Allow-overriding-default-font https://github.com/smurf0969/esp8266-oled-ssd1306 $HOME/Arduino/libraries/esp8266-oled-ssd1306
     # Following libs are not to be tested, just used.
     rm -rf $HOME/Arduino/libraries/esp8266-oled-ssd1306/examples
     rm -rf $HOME/Arduino/libraries/ArduinoJson/examples
     rm -rf $HOME/Arduino/libraries/AdafruitSensor/examples
     rm -rf $HOME/Arduino/libraries/DHT/examples
     rm -rf $HOME/Arduino/libraries/WiFiConnect/examples
+    rm -rf $HOME/Arduino/libraries/esp8266-oled-ssd1306/examples
 }
 
 function install_ide()
