@@ -2,7 +2,6 @@ branches:
     only:
       - master
       - /^v?\d+\.\d+(\.\d+)?(-\S*)?$/
-      - WiFiConnect
       
 os: linux
 dist: trusty
