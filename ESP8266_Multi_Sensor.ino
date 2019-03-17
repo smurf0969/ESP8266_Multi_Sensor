@@ -290,7 +290,7 @@ void reconnect() {
  #ifdef ESP8266
       ESP.reset();
  #else
-      RDP.restart();
+      ESP.restart();
  #endif
       delay(5000);
       return;
@@ -324,7 +324,7 @@ void reconnect() {
  #ifdef ESP8266
       ESP.reset();
  #else
-      RDP.restart();
+      ESP.restart();
  #endif
       for(int x=1;x<=5;x++){
         delay(1000);
