@@ -3,6 +3,7 @@
 #include <ESP8266WiFi.h>
 #else
 #include <WiFi.h>
+#include <SPIFFS.h>
 #endif
 #include <PubSubClient.h> //https://github.com/knolleary/pubsubclient
 #include <stdlib.h>
@@ -13,6 +14,15 @@
 #include <ArduinoJson.h> //https://github.com/bblanchon/ArduinoJson
 
 
+#if defined(ESP8266)
+extern "C" {
+#include "user_interface.h"
+}
+#define ESP_getChipId()   (ESP.getChipId()) ///< Gets an ID from the chip
+#else
+#include <esp_wifi.h>
+#define ESP_getChipId()   ((uint32_t)ESP.getEfuseMac())///< Gets an ID from the chip
+#endif
 
 #define sbVersion "4.2"
 #define clearSavedWiFiConnection false //removes saved connection for testing Access point (true,false)
@@ -185,7 +195,7 @@ void  processPIR() {
 void setup() {
   Serial.begin(115200);
   delay(500);
-  sprintf(SensorName, "ESP%d", ESP.getChipId());
+  sprintf(SensorName, "ESP%d", ESP_getChipId());
   Serial.printf("\nDefault Sensor Name: %s\n", SensorName);
   loadConfig();
   if (shouldSaveConfig) {
