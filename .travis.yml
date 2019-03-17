@@ -2,6 +2,7 @@ branches:
     only:
       - master
       - /^v?\d+\.\d+(\.\d+)?(-\S*)?$/
+      - WiFiConnect
       
 os: linux
 dist: trusty
@@ -28,6 +29,11 @@ matrix:
     - env:
 
       - BUILD_TYPE=build_esp8266
+      - BUILDDOXYGEN=false
+
+    - env:
+
+      - BUILD_TYPE=build_esp32
       - BUILDDOXYGEN=false
 
 
