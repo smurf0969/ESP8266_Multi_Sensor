@@ -8,13 +8,13 @@
 //needed for WiFiManager library
 #include <DNSServer.h>
 #include <ESP8266WebServer.h>
-#include <WiFiManager.h>          //https://github.com/tzapu/WiFiManager
+#include <WiFiConnect.h>          //https://github.com/smurf0969/WiFiConnect
 
 #include <ArduinoJson.h> //https://github.com/bblanchon/ArduinoJson
 
 
 
-#define sbVersion "4.1"
+#define sbVersion "4.2"
 #define clearSavedWiFiConnection false //removes saved connection for testing Access point (true,false)
 
 #define sbDebug  false //disables mqtt and outputs msg to Serial for testing
@@ -61,7 +61,7 @@ DHT dht(thPin, DHT11);
 int snl = 0;//holder for SensorName length
 
 // **************************************************
-// **********    WiFiManager Callbacks    ***********
+// **********    WiFiConnect Callbacks    ***********
 // **************************************************
 bool shouldSaveConfig = false;
 void saveConfigCallback() {
@@ -193,32 +193,27 @@ void setup() {
   }
 
   //WiFiManager
-  WiFiManagerParameter custom_SensorName("SensorName", "Sensor name", SensorName, 25);
-  WiFiManagerParameter custom_mqtt_server("mqtt_server", "MQTT IP", mqtt_server, 16);
-  WiFiManagerParameter custom_hasTemperature("hasTemperature", "Has Temperature", (hasTemperature ? "true" : "false"), 6);
-  WiFiManagerParameter custom_hasHumidity("hasHumidity", "Has Humidity", (hasHumidity ? "true" : "false"), 6);
-  WiFiManagerParameter custom_hasLight("hasLight", "Has LDR", (hasLight ? "true" : "false"), 6);
-  WiFiManagerParameter custom_hasPIR("hasPIR", "Has PIR", (hasPIR ? "true" : "false"), 6);
+  WiFiConnectParam custom_SensorName("SensorName", "Sensor name", SensorName, 25);
+  WiFiConnectParam custom_mqtt_server("mqtt_server", "MQTT IP", mqtt_server, 16);
+  WiFiConnectParam custom_hasTemperature("hasTemperature", "Has Temperature", (hasTemperature ? "true" : "false"), 6);
+  WiFiConnectParam custom_hasHumidity("hasHumidity", "Has Humidity", (hasHumidity ? "true" : "false"), 6);
+  WiFiConnectParam custom_hasLight("hasLight", "Has LDR", (hasLight ? "true" : "false"), 6);
+  WiFiConnectParam custom_hasPIR("hasPIR", "Has PIR", (hasPIR ? "true" : "false"), 6);
 
   //Local intialization. Once its business is done, there is no need to keep it around
-  WiFiManager wifiManager;
-  wifiManager.setSaveConfigCallback(saveConfigCallback);
-  wifiManager.addParameter(&custom_SensorName);
-  wifiManager.addParameter(&custom_mqtt_server);
-  wifiManager.addParameter(&custom_hasTemperature);
-  wifiManager.addParameter(&custom_hasLight);
-  wifiManager.addParameter(&custom_hasLight);
-  wifiManager.addParameter(&custom_hasPIR);
+  WiFiConnect wc;
+  wc.setSaveConfigCallback(saveConfigCallback);
+  wc.addParameter(&custom_SensorName);
+  wc.addParameter(&custom_mqtt_server);
+  wc.addParameter(&custom_hasTemperature);
+  wc.addParameter(&custom_hasLight);
+  wc.addParameter(&custom_hasLight);
+  wc.addParameter(&custom_hasPIR);
 
 #if clearSavedWiFiConnection
   //reset settings - for testing
-  wifiManager.resetSettings();
+  wc.resetSettings();
 #endif
-
-  //sets timeout until configuration portal gets turned off
-  //useful to make it all retry or go to sleep
-  //in seconds
-  wifiManager.setTimeout(180);
 
   //fetches ssid and pass and tries to connect
   //if it does not connect it starts an access point with the specified name
@@ -226,16 +221,9 @@ void setup() {
   //and goes into a blocking loop awaiting configuration
   Serial.printf("\nSensor Name: %s\n", SensorName);
   Serial.print(F("Starting WiFi: "));
-  if (!wifiManager.autoConnect(SensorName)) {
-
-    Serial.println(F("failed to connect and hit timeout"));
-    delay(5000);
-    //reset and try again, or maybe put it to deep sleep
-
-    // ESP.reset();
-    ESP.restart();
-
-    delay(1000);
+  if (!wc.autoConnect(SensorName)) {
+    //start the configuration access point
+    wc.startConfigurationPortal(AP_RESET,SensorName);
 
   }
 
